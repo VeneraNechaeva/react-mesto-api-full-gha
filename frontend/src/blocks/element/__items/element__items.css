@@ -1,0 +1,6 @@
+.element__items {
+  padding: 26px 15px 19px 20px;
+  max-width: 282px;
+  display: flex;
+  justify-content: space-between;
+}

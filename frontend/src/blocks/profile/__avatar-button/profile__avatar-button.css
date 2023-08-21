@@ -1,0 +1,57 @@
+.profile__avatar-button {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-right: 30px;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  position: relative;
+}
+
+.profile__avatar-button::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgb(0, 0, 0);
+  opacity: 0;
+  transition-duration: 0.4s;
+  z-index: 1;
+}
+
+.profile__avatar-button:hover::before {
+  opacity: 0.8;
+  transition: linear;
+  transition-duration: 0.4s;
+}
+
+.profile__avatar-button::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-image: url(../../../images/Vector-edit-button.svg);
+  background-size: 26px 26px;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition-duration: 0.4s;
+  z-index: 2;
+  visibility: hidden;
+}
+
+.profile__avatar-button:hover::after {
+  visibility: visible;
+  transition: linear;
+  transition-duration: 0.4s;
+}
+
