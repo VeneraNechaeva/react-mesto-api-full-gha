@@ -16,6 +16,9 @@ const bodyParser = require('body-parser');
 // уязвимостей и кибератак
 const helmet = require('helmet');
 
+// Импорт логгеров
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+
 // Подключаем лимитер запросов ( для ограничения количества запросов )
 const { limiter } = require('./utils/limiter');
 
@@ -48,6 +51,8 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(requestLogger); // подключаем логгер запросов, до всех обработчиков роутов
+
 // Роуты для логина и регистрации
 app.post('/signin', loginValidator, login);
 app.post('/signup', createUserValidator, createUser);
@@ -59,6 +64,8 @@ app.use('/', routerUser); // запускаем
 app.use('/', routerCard); // запускаем
 
 app.use(utils.checkIncorrectPath); // запускаем обработку неправильного пути
+
+app.use(errorLogger); // подключаем логгер ошибок после обработчиков роутов и до обработчиков ошибок
 
 // Обработчик ошибок celebrate
 app.use(errors());
