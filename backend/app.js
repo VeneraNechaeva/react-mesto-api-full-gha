@@ -25,6 +25,9 @@ const { limiter } = require('./utils/limiter');
 // Импорт централизованного обработка ошибок
 const { errorHandler } = require('./middlewares/error-handler');
 
+// Импорт CORS
+const { corsCheck } = require('./middlewares/cors-check');
+
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 
@@ -50,6 +53,8 @@ app.use(helmet());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(corsCheck); // подключаем CORS
 
 app.use(requestLogger); // подключаем логгер запросов, до всех обработчиков роутов
 
