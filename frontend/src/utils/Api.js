@@ -100,9 +100,8 @@ class Api {
 
 // Создание экземпляров класса Api
 export const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
+  baseUrl: 'http://mesto.nechaeva.nomoredomainsicu.ru',
   headers: {
-    authorization: 'e9c671c4-c4d8-4942-9020-977fdfc1a3d7',
     'Content-Type': 'application/json'
   }
 });
