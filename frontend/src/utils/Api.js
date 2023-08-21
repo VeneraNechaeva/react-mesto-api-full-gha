@@ -100,7 +100,7 @@ class Api {
 
 // Создание экземпляров класса Api
 export const api = new Api({
-  baseUrl: 'http://mesto.nechaeva.nomoredomainsicu.ru',
+  baseUrl: 'http://api.mesto.nechaeva.nomoredomainsicu.ru',
   headers: {
     'Content-Type': 'application/json'
   }
