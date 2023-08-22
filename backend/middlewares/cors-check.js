@@ -2,8 +2,8 @@
 const allowedCors = [
   'https://mesto.nechaeva.nomoredomainsicu.ru',
   'http://mesto.nechaeva.nomoredomainsicu.ru',
-  'https://mesto.nechaeva.nomoredomainsicu.ru/',
-  'http://mesto.nechaeva.nomoredomainsicu.ru/',
+  'https://mesto.nechaeva.nomoredomainsicu.ru/users/me',
+  'http://mesto.nechaeva.nomoredomainsicu.ru/users/me',
   'localhost:3000',
 ];
 
