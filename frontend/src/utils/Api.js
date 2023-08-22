@@ -7,7 +7,7 @@ class Api {
   // Послать запрос
   _sendRequest(url, options) {
 
-    const optionsWithToken = options.copy();
+    const optionsWithToken = Object.assign({}, options);
 
     const token = localStorage.getItem('jwt');
     if (token) {
