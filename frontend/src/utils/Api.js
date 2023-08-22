@@ -11,7 +11,8 @@ class Api {
 
     const token = localStorage.getItem('jwt');
     if (token) {
-      optionsWithToken.headers = { ...this._headers, ...{ 'Cookie': `jwt=${token}` } }
+      // optionsWithToken.headers = { ...this._headers, ...{ 'Cookie': `jwt=${token}` } }
+      optionsWithToken.cookies = { jwt: token }
     }
 
     console.log('optionsWithToken:', optionsWithToken);
