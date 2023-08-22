@@ -2,6 +2,8 @@
 const allowedCors = [
   'https://mesto.nechaeva.nomoredomainsicu.ru',
   'http://mesto.nechaeva.nomoredomainsicu.ru',
+  'https://mesto.nechaeva.nomoredomainsicu.ru/',
+  'http://mesto.nechaeva.nomoredomainsicu.ru/',
   'localhost:3000',
 ];
 
