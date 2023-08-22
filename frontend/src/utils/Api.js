@@ -14,6 +14,8 @@ class Api {
       optionsWithToken.headers = { ...this._headers, ...{ 'Cookie': `jwt=${token}` } }
     }
 
+    console.log('optionsWithToken:', optionsWithToken);
+
     return fetch(url, optionsWithToken)
       .then((res) => {
         if (res.ok) {
