@@ -44,7 +44,7 @@ export const getContent = (token) => {
         headers: {
             'Content-Type': 'application/json',
             // 'Authorization': `Bearer ${token}`
+            'cookies': { jwt: token }
         },
-        cookies: { jwt: token }
     })
 };
