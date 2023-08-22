@@ -7,7 +7,14 @@ class Api {
   // Послать запрос
   _sendRequest(url, options) {
 
-    return fetch(url, options)
+    const optionsWithToken = options.copy();
+
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      optionsWithToken.headers = { ...this._headers, ...{ 'Cookie': `jwt=${token}` } }
+    }
+
+    return fetch(url, optionsWithToken)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -102,7 +109,6 @@ class Api {
 export const api = new Api({
   baseUrl: 'http://api.mesto.nechaeva.nomoredomainsicu.ru',
   headers: {
-    authorization: 'e9c671c4-c4d8-4942-9020-977fdfc1a3d7',
     'Content-Type': 'application/json'
   }
 });
