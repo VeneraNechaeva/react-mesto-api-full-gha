@@ -102,6 +102,7 @@ class Api {
 export const api = new Api({
   baseUrl: 'http://api.mesto.nechaeva.nomoredomainsicu.ru',
   headers: {
+    authorization: 'e9c671c4-c4d8-4942-9020-977fdfc1a3d7',
     'Content-Type': 'application/json'
   }
 });

@@ -1,18 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PopupWithForm from './PopupWithForm.js';
+import { useFormAndValidation } from '../hooks/useFormAndValidation.js';
 
 function EditAvatarPopup({ onUpdateAvatar, isOpen, onClose }) {
-
-    // Стейт переменные, в которых содержатся значения инпутов
-    const [avatar, setAvatar] = useState('');
 
     // записываем объект, возвращаемый хуком, в переменную
     const avatarRef = useRef();
 
-    // Обработчик изменения инпута, обновляет стейт
-    function handleChangeAvatar(e) {
-        setAvatar(e.target.value);
-    }
+    // Запуск валидации
+    const { values, handleChange, errors, isValid, setValues, resetForm } = useFormAndValidation()
 
     function handleSubmit(e) {
         // Запрещаем браузеру переходить по адресу формы
@@ -24,9 +20,16 @@ function EditAvatarPopup({ onUpdateAvatar, isOpen, onClose }) {
         });
     }
 
+    // Хук для очистки полей формы при открытии (после успешной отправки запроса)
+    useEffect(() => {
+        if (!isOpen) {
+            resetForm({ avatar: '' });
+        } else setValues({ avatar: '' });
+    }, [isOpen]);
+
     return (
         <PopupWithForm popupName="avatar" classText="title" title="Обновить аватар" name="update-avatar" buttonText="Сохранить"
-            isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>
+            isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit} isSubmitEnable={isValid}>
             <div className="popup__label">
                 <input
                     id="avatar"
@@ -35,11 +38,11 @@ function EditAvatarPopup({ onUpdateAvatar, isOpen, onClose }) {
                     name="avatar"
                     placeholder="Ссылка"
                     required
-                    value={avatar ?? ''}
-                    onChange={handleChangeAvatar}
+                    value={values.avatar ?? ''}
+                    onChange={handleChange}
                     ref={avatarRef}
                 />
-                <span className="popup__error avatar-error" />
+                <span className={`popup__error avatar-error  ${errors?.avatar ? "popup__error_visible" : ""}`}>{errors?.avatar}</span>
             </div>
         </PopupWithForm>
     )

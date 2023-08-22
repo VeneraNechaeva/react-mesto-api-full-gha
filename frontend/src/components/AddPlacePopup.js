@@ -1,20 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PopupWithForm from './PopupWithForm.js';
+import { useFormAndValidation } from '../hooks/useFormAndValidation.js';
 
 function AddPlacePopup({ onAddPlace, isOpen, onClose }) {
 
-    // Стейт переменные, в которых содержатся значения инпутов
-    const [place, setPlace] = useState('');
-    const [link, setLink] = useState('');
-
-    // Обработчики изменения инпута, обновляет стейт 
-    function handleChangePlace(e) {
-        setPlace(e.target.value);
-    }
-
-    function handleChangLink(e) {
-        setLink(e.target.value);
-    }
+// Запуск валидации
+const { values, handleChange, errors, isValid, setValues, resetForm } = useFormAndValidation()
 
     function handleSubmit(e) {
         // Запрещаем браузеру переходить по адресу формы
@@ -22,36 +13,35 @@ function AddPlacePopup({ onAddPlace, isOpen, onClose }) {
 
         // Передаём значения управляемых компонентов во внешний обработчик
         onAddPlace({
-            name: place,
-            link: link,
+            name: values.place ?? '',
+            link: values.link ?? '',
         });
     }
 
     // Хук для очистки полей формы при открытии (после успешной отправки запроса)
     useEffect(() => {
         if (!isOpen) {
-            setPlace('');
-            setLink('');
-        }
+            resetForm({name: '', link: ''});
+        } else setValues({name: '', link: ''});
     }, [isOpen]);
 
     return (
         <PopupWithForm popupName="add" classText="title" title="Новое место" name="new-place" buttonText="Создать"
-            isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit} >
+            isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit} isSubmitEnable={isValid}>
             <div className="popup__label">
                 <input
                     id="place"
                     className="popup__field popup__field_text_name-place"
                     type="text"
-                    name="name"
+                    name="place"
                     placeholder="Название"
                     minLength={2}
                     maxLength={30}
                     required
-                    value={place ?? ''}
-                    onChange={handleChangePlace}
+                    value={values.place ?? ''}
+                    onChange={handleChange}
                 />
-                <span className="popup__error place-error" />
+                <span className={`popup__error place-error  ${errors?.place ? "popup__error_visible" : ""}`}>{errors?.place}</span>
             </div>
             <div className="popup__label">
                 <input
@@ -61,10 +51,10 @@ function AddPlacePopup({ onAddPlace, isOpen, onClose }) {
                     name="link"
                     placeholder="Ссылка"
                     required
-                    value={link ?? ''}
-                    onChange={handleChangLink}
+                    value={values.link ?? ''}
+                    onChange={handleChange}
                 />
-                <span className="popup__error link-error" />
+                <span className={`popup__error link-error  ${errors?.link ? "popup__error_visible" : ""}`}>{errors?.link}</span>
             </div>
         </PopupWithForm>
     )

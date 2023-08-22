@@ -1,0 +1,14 @@
+.header__link {
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 18px;
+    color: #A9A9A9;
+    transition-duration: 0.4s;
+}
+
+.header__link:hover {
+    transition: linear;
+    transition-duration: 0.4s;
+    opacity: 0.6;
+}

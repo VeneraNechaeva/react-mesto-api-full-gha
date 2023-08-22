@@ -1,11 +1,15 @@
 import React from 'react';
 
 function Footer() {
-    return (
-        <footer className="footer page__padding">
-          <p className="footer__copyright">© 2020 Mesto Russia</p>
-        </footer>
-    )
+
+  // Динамическое обновление года
+  let date = new Date().getFullYear();
+
+  return (
+    <footer className="footer page__padding">
+      <p className="footer__copyright">© {date} Mesto Russia</p>
+    </footer>
+  )
 }
 
 export default Footer;
