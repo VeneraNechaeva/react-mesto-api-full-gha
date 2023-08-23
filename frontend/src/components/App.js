@@ -66,9 +66,15 @@ function App() {
           setCurrentUser(() => res);
           setLoggedIn(true);
           navigate("/users/me", { replace: true });
+          api.getInitialCards()
+          .then((cardsData) => {
+            setCards(cardsData.data);
+          })
+          .catch((err) => {
+            console.log(err); // выведем ошибку в консоль
+          })
         }
       })
-
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
         });
