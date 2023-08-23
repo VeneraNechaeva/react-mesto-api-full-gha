@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import headerLogo from '../images/Vector.svg';
 
-function Header({ userInfo }) {
+function Header({ userInfo, signOut }) {
 
     const location = useLocation();
     const [headerInfo, setHeaderInfo] = useState({});
@@ -18,17 +18,17 @@ function Header({ userInfo }) {
                 setHeaderInfo({ textLink: "Войти", pathLink: "/signin", email: '' })
             }
             if (location.pathname === "/users/me") {
-                setHeaderInfo({ textLink: "Выйти", pathLink: "/signin", onClick: onSignOut, email: userInfo?.email || '' })
+                setHeaderInfo({ textLink: "Выйти", pathLink: "/signin", onClick: signOut, email: userInfo?.email || '' })
             }
         }
     }, [location])
 
 
-    // Переход по кнопке "Выйти"
-    // Удаляет токен из куков
-    function onSignOut(e) {
-        localStorage.removeItem('jwt');
-    }
+    // // Переход по кнопке "Выйти"
+    // // Удаляет токен из куков
+    // function onSignOut(e) {
+    //     localStorage.removeItem('jwt'); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // }
 
     return (
         <header className="header page__margin">

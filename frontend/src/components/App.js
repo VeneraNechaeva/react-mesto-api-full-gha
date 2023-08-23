@@ -227,6 +227,11 @@ function App() {
       })
   }
 
+  // Для удаления токена из куки
+  function handlesignOut() {
+    api.signOut();
+  }
+
   return (
 
     // Используем провайдер контекста текущего пользователя
@@ -248,7 +253,7 @@ function App() {
           <InfoTooltip isOpen={isFailPopupOpen} popupName="fail" classIcon="fail-icon" classText="title-fail" title={popupErrorMessage}
             onClose={closeAllPopups} />
 
-          <Header userInfo={currentUser} />
+          <Header userInfo={currentUser} signOut={handlesignOut} />
 
           <Routes>
 
