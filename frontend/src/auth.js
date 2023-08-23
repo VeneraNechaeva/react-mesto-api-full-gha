@@ -2,7 +2,7 @@
 
 import { request } from './utils/apiHelper.js';
 
-export const BASE_URL = 'http://api.mesto.nechaeva.nomoredomainsicu.ru';
+export const BASE_URL = 'https://api.mesto.nechaeva.nomoredomainsicu.ru';
 
 // Функция для регистрации пользователя
 export const register = (email, password) => {
