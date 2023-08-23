@@ -58,6 +58,13 @@ app.use(corsCheck); // подключаем CORS
 
 app.use(requestLogger); // подключаем логгер запросов, до всех обработчиков роутов
 
+// TODO: Краш-тест сервера. Удалить этот код после успешного прохождения ревью
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 // Роуты для логина и регистрации
 app.post('/signin', loginValidator, login);
 app.post('/signup', createUserValidator, createUser);

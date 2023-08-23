@@ -23,13 +23,6 @@ function Header({ userInfo, signOut }) {
         }
     }, [location])
 
-
-    // // Переход по кнопке "Выйти"
-    // // Удаляет токен из куков
-    // function onSignOut(e) {
-    //     localStorage.removeItem('jwt'); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // }
-
     return (
         <header className="header page__margin">
             <img
