@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.111.35
+IP 158.160.111.35
 
 Frontend https://mesto.nechaeva.nomoredomainsicu.ru
 
