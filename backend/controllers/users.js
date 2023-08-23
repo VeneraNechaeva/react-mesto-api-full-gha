@@ -1,6 +1,9 @@
 // Импортируем модуль bcrypt для хеширования пароля
 const bcrypt = require('bcryptjs');
 
+// Импортируем переменные окружения
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 // Импортируем модуль jsonwebtoken для создания токенов
 const jwt = require('jsonwebtoken');
 
@@ -89,7 +92,8 @@ module.exports.login = (req, res, next) => {
       // создадим токен
       const token = jwt.sign(
         { _id: user._id.toString() },
-        'some-secret-key',
+        // берем секретный ключ из переменных окружения
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' }, // токен будет просрочен через неделю
       );
       // сохраним токен в куки

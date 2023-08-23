@@ -1,3 +1,6 @@
+// Импортируем модуль dotenv, чтобы загрузить файл .env ( с переменными окружения) в Node.js
+require('dotenv').config();
+
 // Импортируем express
 const express = require('express');
 
