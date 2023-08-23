@@ -29,22 +29,23 @@ export const login = (email, password) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ email, password }),
+            withCredntials: true,
+            credentials: 'include',
         }
     )
 
 };
-
 // Функция, которая проверяет логин и пароль пользователя на 
 // соответствие какому-либо профилю, хранящемуся в базе данных.
-export const getContent = (token) => {
+export const getContent = () => {
 
     return request(`${BASE_URL}/users/me`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            // 'Authorization': `Bearer ${token}`
         },
-        cookies: { 'jwt': token }
+        withCredntials: true,
+        credentials: 'include'
     })
 };

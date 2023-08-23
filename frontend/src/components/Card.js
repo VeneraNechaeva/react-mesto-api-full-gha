@@ -8,10 +8,17 @@ function Card({ link, name, likes, owner, _id, onCardClick, onCardLike, onCardDe
     const currentUser = React.useContext(CurrentUserContext);
 
     // Определяем, являемся ли мы владельцем текущей карточки
-    const isOwn = owner._id === currentUser._id;
+    const isOwn = owner === currentUser._id;
 
     // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-    const isLiked = likes.some(i => i._id === currentUser._id);
+    let isLiked = false;
+    try {
+        isLiked = likes.some(id => id === currentUser._id);
+    } catch (err) {
+        console.log('Card likes is:', likes);
+        console.log('Card id is:', _id);
+    }
+    
 
     // Создаём переменную, которую после зададим в `className` для кнопки лайка
     const cardLikeButtonClassName = (

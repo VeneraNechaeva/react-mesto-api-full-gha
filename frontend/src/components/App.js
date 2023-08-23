@@ -10,7 +10,6 @@ import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
 import * as auth from '../auth.js';
-import { useFormAndValidation } from '../hooks/useFormAndValidation.js';
 
 // Импортируем компоненты приложения, которые используем в Роутах
 import Register from './Register.js';
@@ -49,9 +48,6 @@ function App() {
   // Стейт статуса пользователя — вошёл он в систему или нет
   const [loggedIn, setLoggedIn] = useState(false);
 
-  // Стейт информации от пользователя
-  const [userInfo, setUserInfo] = useState({});
-
   // Хук возвращает функцию, которая позволяет рограммно перемещаться
   const navigate = useNavigate();
 
@@ -61,43 +57,37 @@ function App() {
   }, [])
 
 
-  // Если у пользователя есть токен в localStorage, 
-  // эта функция проверит, действующий он или нет (валидность токена)
+  // Функция получает информацию о пользователе из куки
   const tokenCheck = () => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      // проверим токен
-      auth.getContent(jwt).then((res) => {
+
+      auth.getContent().then((res) => {
         if (res) {
           // авторизуем пользователя
-          setUserInfo(() => res.data);
+          setCurrentUser(() => res);
           setLoggedIn(true);
-          navigate("/users/me", { replace: true })
+          navigate("/users/me", { replace: true });
         }
       })
 
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
         });
-    }
   }
 
   // Эффект при монтровании, вызывает запрос и обновляет стейт-переменную
   // из полученного значения
   useEffect(() => {
     api.getUserInformation()
-
       .then((userData) => {
         setCurrentUser(userData);
       })
-
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
       })
 
     api.getInitialCards()
       .then((cardsData) => {
-        setCards(cardsData);
+        setCards(cardsData.data);
       })
 
       .catch((err) => {
@@ -173,7 +163,7 @@ function App() {
   // Для лайка карточки
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(id => id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
@@ -228,7 +218,7 @@ function App() {
   // Для формы добавления карточки
   function handleAddPlaceSubmit(newCard) {
     api.addNewCard(newCard.name, newCard.link).then((savedNewCard) => {
-      setCards([savedNewCard, ...cards]);
+      setCards([savedNewCard.data, ...cards]);
       closeAllPopups();
     })
 
@@ -258,7 +248,7 @@ function App() {
           <InfoTooltip isOpen={isFailPopupOpen} popupName="fail" classIcon="fail-icon" classText="title-fail" title={popupErrorMessage}
             onClose={closeAllPopups} />
 
-          <Header userInfo={userInfo} />
+          <Header userInfo={currentUser} />
 
           <Routes>
 

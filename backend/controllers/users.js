@@ -88,11 +88,10 @@ module.exports.login = (req, res, next) => {
       }
       // создадим токен
       const token = jwt.sign(
-        { _id: user._id },
+        { _id: user._id.toString() },
         'some-secret-key',
         { expiresIn: '7d' }, // токен будет просрочен через неделю
       );
-
       // сохраним токен в куки
       res.cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,

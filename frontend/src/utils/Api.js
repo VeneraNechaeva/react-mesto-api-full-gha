@@ -8,14 +8,8 @@ class Api {
   _sendRequest(url, options) {
 
     const optionsWithToken = Object.assign({}, options);
-
-    const token = localStorage.getItem('jwt');
-    if (token) {
-      // optionsWithToken.headers = { ...this._headers, ...{ 'Cookie': `jwt=${token}` } }
-      optionsWithToken.cookies = { jwt: token }
-    }
-
-    console.log('optionsWithToken:', optionsWithToken);
+    optionsWithToken['withCredntials'] = true;
+    optionsWithToken['credentials'] = 'include';
 
     return fetch(url, optionsWithToken)
       .then((res) => {

@@ -27,8 +27,8 @@ function Login({ handleLogin, handleFailLogin }) {
         }
         auth.login(values.email, values.password)
             .then((data) => {
+                console.log('onLogin data: ', data);
                 try {
-                    localStorage.setItem('jwt', data.token);
                     resetForm();
                     handleLogin(e);
                     navigate('/users/me', { replace: true });
