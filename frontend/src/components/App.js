@@ -35,12 +35,12 @@ function App() {
   // Стейты для модальных окон регистрации (информационная подсказка)
   // Для успешной регистрации
   const [isSuccessRegistrPopupOpen, setIsSuccessRegistrPopupOpen] = useState(false);
-  
+
   // Для неуспешного входа и регистрации
   const [isFailPopupOpen, setIsFailPopupOpen] = useState(false);
 
-   // Стейт с текстом ошибки
-   const [popupErrorMessage, setPopupErrorMessage] = useState('Что-то пошло не так! Попробуйте ещё раз.');
+  // Стейт с текстом ошибки
+  const [popupErrorMessage, setPopupErrorMessage] = useState('Что-то пошло не так! Попробуйте ещё раз.');
 
   // Стейт для контекста текущего пользователя
   const [currentUser, setCurrentUser] = useState({});
@@ -60,24 +60,25 @@ function App() {
   // Функция получает информацию о пользователе из куки
   const tokenCheck = () => {
 
-      auth.getContent().then((res) => {
-        if (res) {
-          // авторизуем пользователя
-          setCurrentUser(() => res);
-          setLoggedIn(true);
-          navigate("/users/me", { replace: true });
-          api.getInitialCards()
+    auth.getContent().then((res) => {
+      if (res) {
+        // авторизуем пользователя
+        setCurrentUser(() => res);
+        setLoggedIn(true);
+        navigate("/users/me", { replace: true });
+        
+        api.getInitialCards()
           .then((cardsData) => {
             setCards(cardsData.data);
           })
           .catch((err) => {
             console.log(err); // выведем ошибку в консоль
           })
-        }
-      })
-        .catch((err) => {
-          console.log(err); // выведем ошибку в консоль
-        });
+      }
+    })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
   }
 
   // Эффект при монтровании, вызывает запрос и обновляет стейт-переменную
@@ -265,7 +266,7 @@ function App() {
 
             <Route path="/" element={loggedIn ? <Navigate to="/users/me" replace /> : <Navigate to="/signin" replace />} />
 
-            <Route path="/signup" element={<Register onSuccessRegister={handleSuccessRegistr} onFailRegister={handleFailRegister}/>} />
+            <Route path="/signup" element={<Register onSuccessRegister={handleSuccessRegistr} onFailRegister={handleFailRegister} />} />
             <Route path="/signin" element={<Login handleLogin={handleLogin} handleFailLogin={handleFailLogin} />} />
 
             {/* Защищённый маршрут */}
