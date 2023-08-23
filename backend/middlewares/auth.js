@@ -5,8 +5,6 @@ const utils = require('../utils/utils');
 
 // eslint-disable-next-line consistent-return
 module.exports = (req, res, next) => {
-  console.log('req.cookies:', req.cookies.jwt);
-
   // достаём токен из Куки
   const jwtToken = req.cookies.jwt;
 
