@@ -100,6 +100,14 @@ class Api {
       })
     })
   }
+
+  // Удаление токена из куки
+  signOut() {
+    return this._sendRequest(`${this._baseUrl}/logout`, {
+      method: 'GET',
+      headers: this._headers
+    })
+  }
 }
 
 // Создание экземпляров класса Api

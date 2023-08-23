@@ -25,7 +25,7 @@ function Header({ userInfo }) {
 
 
     // Переход по кнопке "Выйти"
-    // Удаляет JWT из localStorage
+    // Удаляет токен из куков
     function onSignOut(e) {
         localStorage.removeItem('jwt');
     }

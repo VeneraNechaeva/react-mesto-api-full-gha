@@ -28,7 +28,7 @@ const { errorHandler } = require('./middlewares/error-handler');
 // Импорт CORS
 const { corsCheck } = require('./middlewares/cors-check');
 
-const { createUser, login } = require('./controllers/users');
+const { createUser, login, logOut } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 
 const utils = require('./utils/utils');
@@ -64,6 +64,8 @@ app.post('/signup', createUserValidator, createUser);
 
 // Авторизация (Защищаем роуты авторизацией)
 app.use(auth);
+
+app.get('/logout', logOut);
 
 app.use('/', routerUser); // запускаем
 app.use('/', routerCard); // запускаем

@@ -103,6 +103,13 @@ module.exports.login = (req, res, next) => {
     .catch(next);
 };
 
+// Создаём контроллер удаления jwt из куков
+module.exports.logOut = (req, res, next) => {
+  res.clearCookie('jwt')
+    .send()
+    .catch(next);
+};
+
 // Контроллер для получения информации о текущем пользователе
 module.exports.getCurrentUser = (req, res, next) => {
   const userId = req.user._id;
