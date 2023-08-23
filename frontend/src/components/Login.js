@@ -27,7 +27,6 @@ function Login({ handleLogin, handleFailLogin }) {
         }
         auth.login(values.email, values.password)
             .then((data) => {
-                console.log('onLogin data: ', data);
                 try {
                     resetForm();
                     handleLogin(e);
