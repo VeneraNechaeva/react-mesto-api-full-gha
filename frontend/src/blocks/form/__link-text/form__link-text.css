@@ -1,0 +1,13 @@
+.form__link-text {
+    margin-left: 3px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.form__link-text:hover {
+    transition: linear;
+    transition-duration: 0.4s;
+    opacity: 0.6;
+}

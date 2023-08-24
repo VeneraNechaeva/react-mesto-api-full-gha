@@ -1,0 +1,7 @@
+.popup__fail-icon {
+    width: 120px;
+    height: 120px;
+    background-image: url(../../../images/Vector-icon-fail.svg);
+    margin-top: 60px;
+    align-self: center;
+}

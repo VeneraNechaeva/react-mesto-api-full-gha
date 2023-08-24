@@ -1,0 +1,8 @@
+.form__error_visible-user {
+  display: block;
+  color: rgba(255, 0, 0, 1);
+  font-weight: 400;
+  font-size: 12px;
+  position: absolute;
+  top: 30px;
+}

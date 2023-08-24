@@ -1,0 +1,16 @@
+.element__icon-like {
+  width: 22px;
+  height: 19px;
+  border: none;
+  cursor: pointer;
+  background-image: url(../../../images/Vector-icon-like.svg);
+  background-color: transparent;
+  margin-right: 5px;
+  transition-duration: 0.4s;
+}
+
+.element__icon-like:hover {
+  transition: linear;
+  transition-duration: 0.4s;
+  opacity: 0.5;
+}

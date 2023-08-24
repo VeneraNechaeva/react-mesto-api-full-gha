@@ -1,0 +1,14 @@
+.profile__info {
+  display: grid;
+  gap: 10px 18px;
+  grid-template-areas:
+    "title buttom"
+    "subtitle .";
+}
+
+@media screen and (max-width: 600px) {
+  .profile__info {
+    gap: 14px 10px;
+    margin-top: 22.25px;
+  }
+}
