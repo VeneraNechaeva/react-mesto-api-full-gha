@@ -50,8 +50,6 @@ const app = express();
 
 app.use(cookieParser()); // подключаем парсер кук как мидлвэр
 
-app.use(limiter); // применяем limiter для ограничения скорости ко всем запросам
-
 app.use(helmet());
 
 app.use(bodyParser.json());
@@ -60,6 +58,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(corsCheck); // подключаем CORS
 
 app.use(requestLogger); // подключаем логгер запросов, до всех обработчиков роутов
+
+app.use(limiter); // применяем limiter для ограничения скорости ко всем запросам
 
 // TODO: Краш-тест сервера. Удалить этот код после успешного прохождения ревью
 app.get('/crash-test', () => {

@@ -10,5 +10,6 @@
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
   min-width: 320px;
+  min-height: 100vh;
   color: #FFFFFF;
 }
